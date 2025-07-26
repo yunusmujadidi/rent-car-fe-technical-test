@@ -92,7 +92,7 @@ export const SidebarFooter = () => {
                 System
               </DropdownMenuCheckboxItem>
               <DropdownMenuSeparator />
-              <DropdownMenuItem>
+              <DropdownMenuItem disabled>
                 <LogOut />
                 Log out
               </DropdownMenuItem>

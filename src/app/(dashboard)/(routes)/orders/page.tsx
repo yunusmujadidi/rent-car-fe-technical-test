@@ -75,7 +75,7 @@ const OrdersPage = async () => {
       {/* search bar */}
       <div className="relative">
         <Input
-          className="max-w-3xl pl-10"
+          className="max-w-3xl pl-10 bg-muted"
           placeholder="Search orders by id, car id, or location"
         />
         <Search className="w-5 h-5 text-muted-foreground absolute left-3 top-1/2 transform -translate-y-1/2" />

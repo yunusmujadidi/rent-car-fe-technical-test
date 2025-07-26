@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { PlusCircle, Search } from "lucide-react";
 import { DataTable } from "./data-table";
 import { columns, Payment } from "./columns";
+import { PageHeader } from "@/components/main/page-title";
 
 async function getData(): Promise<Payment[]> {
   // Fetch data from your API here.
@@ -65,18 +66,12 @@ const OrdersPage = async () => {
   return (
     <div className="m-4 p-4 space-y-4">
       {/* header */}
-      <div className="flex justify-between">
-        <div>
-          <h1 className="text-3xl font-semibold">Orders Management</h1>
-          <p className="text-muted-foreground">Manage your rental car orders</p>
-        </div>
-        <div>
-          <Button>
-            Add New Order
-            <PlusCircle className="size-4 ml-1" />
-          </Button>
-        </div>
-      </div>
+      <PageHeader
+        title="Orders Management"
+        description="Manage your rental car orders"
+        actionButton
+        buttonTitle="Add New Order"
+      />
       {/* search bar */}
       <div className="relative">
         <Input

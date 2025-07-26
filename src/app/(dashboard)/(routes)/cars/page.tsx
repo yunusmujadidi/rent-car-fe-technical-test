@@ -3,23 +3,19 @@ import { PlusCircle, Search } from "lucide-react";
 import { CarCard } from "@/components/main/car-card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { PageHeader } from "@/components/main/page-title";
 
 const CarsPage = () => {
   return (
     <div className="m-4 p-4 space-y-4">
       {/* header */}
-      <div className="flex justify-between">
-        <div>
-          <h1 className="text-3xl font-semibold">Cars Management</h1>
-          <p className="text-muted-foreground">Manage your rental cars</p>
-        </div>
-        <div>
-          <Button>
-            Add New Car
-            <PlusCircle className="size-4 ml-1" />
-          </Button>
-        </div>
-      </div>
+      <PageHeader
+        title="Cars Management"
+        description="Manage your rental cars"
+        actionButton
+        buttonTitle="Add New Car"
+      />
+
       {/* search bar */}
       <div className="relative">
         <Input

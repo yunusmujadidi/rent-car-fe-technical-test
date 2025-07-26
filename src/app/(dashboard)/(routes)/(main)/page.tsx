@@ -1,10 +1,10 @@
-import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/main/page-title";
 
 const Home = () => {
   return (
-    <div>
-      <h1 className="text-blue-500">Test123</h1>
-      <Button>Test</Button>
+    <div className="m-4 p-4">
+      {/* header */}
+      <PageHeader title="Dashboard" description="Welcome back to dashboard!" />
     </div>
   );
 };

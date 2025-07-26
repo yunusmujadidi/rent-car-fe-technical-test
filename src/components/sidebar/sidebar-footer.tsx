@@ -8,6 +8,7 @@ import {
 } from "@/components/ui/sidebar";
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuLabel,
@@ -17,8 +18,10 @@ import {
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { LogOut, MoreVertical } from "lucide-react";
+import { useTheme } from "next-themes";
 
 export const SidebarFooter = () => {
+  const { setTheme, theme } = useTheme();
   const isMobile = useIsMobile();
   const user = {
     avatar: "/",
@@ -68,7 +71,26 @@ export const SidebarFooter = () => {
                   </div>
                 </div>
               </DropdownMenuLabel>
-
+              <DropdownMenuSeparator />
+              <DropdownMenuLabel>App Theme</DropdownMenuLabel>
+              <DropdownMenuCheckboxItem
+                checked={theme === "light"}
+                onClick={() => setTheme("light")}
+              >
+                Light
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem
+                checked={theme === "dark"}
+                onClick={() => setTheme("dark")}
+              >
+                Dark
+              </DropdownMenuCheckboxItem>
+              <DropdownMenuCheckboxItem
+                checked={theme === "system"}
+                onClick={() => setTheme("system")}
+              >
+                System
+              </DropdownMenuCheckboxItem>
               <DropdownMenuSeparator />
               <DropdownMenuItem>
                 <LogOut />

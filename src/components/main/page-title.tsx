@@ -1,5 +1,6 @@
 import { PlusCircle } from "lucide-react";
 import { Button } from "../ui/button";
+import { NewCarButton } from "../button/new-car-button";
 
 interface PageTitleProps {
   title: string;
@@ -20,14 +21,7 @@ export const PageHeader = ({
         <h1 className="text-3xl font-semibold">{title}</h1>
         <p className="text-muted-foreground">{description}</p>
       </div>
-      <div>
-        {actionButton && (
-          <Button>
-            {buttonTitle}
-            <PlusCircle className="size-4 ml-1" />
-          </Button>
-        )}
-      </div>
+      <div>{actionButton && <NewCarButton buttonTitle={buttonTitle} />}</div>
     </div>
   );
 };

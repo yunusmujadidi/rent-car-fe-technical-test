@@ -18,8 +18,12 @@ export const DeleteCarButton = ({ id }: { id: string }) => {
     if (ok) {
       startTransition(async () => {
         try {
-          await deleteCar(id);
-          toast.success("Car deleted successfully");
+          const promise = deleteCar(id);
+          toast.promise(promise, {
+            loading: "Deleting car...",
+            success: () => "Car deleted successfully",
+            error: "Error deleting car",
+          });
         } catch (error) {
           toast.error("Error deleting car");
         }

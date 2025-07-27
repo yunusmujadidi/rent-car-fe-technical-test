@@ -1,4 +1,5 @@
 import { NewCarButton } from "@/components/button/new-car-button";
+import { NeworderButton } from "../button/new-order-button";
 
 interface PageTitleProps {
   title: string;
@@ -22,7 +23,7 @@ export const PageHeader = ({
         <p className="text-muted-foreground">{description}</p>
       </div>
       {actionCarButton && <NewCarButton buttonTitle={buttonTitle} />}
-      {actionOrderButton && <NewCarButton buttonTitle={buttonTitle} />}
+      {actionOrderButton && <NeworderButton buttonTitle={buttonTitle} />}
     </div>
   );
 };

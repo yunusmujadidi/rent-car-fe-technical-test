@@ -1,5 +1,6 @@
-import { Car } from "@/lib/types";
 import { create } from "zustand";
+
+import { Car } from "@/lib/types";
 
 type useNewCarDialogState = {
   isOpen: boolean;

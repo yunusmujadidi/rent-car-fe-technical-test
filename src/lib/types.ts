@@ -7,6 +7,7 @@ export interface Car {
 }
 
 export interface Order {
+  id: string;
   car_id: string;
   order_date: string;
   pickup_date: string;

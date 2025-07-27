@@ -9,7 +9,6 @@ export const carFormSchema = z.object({
 
 export const orderFormSchema = z.object({
   car_id: z.string().min(1, "Car selection is required!"),
-  order_date: z.string().min(1, "Order date is required!"),
   pickup_date: z.string().min(1, "Pickup date is required!"),
   dropoff_date: z.string().min(1, "Dropoff date is required!"),
   pickup_location: z.string().min(1, "Pickup location is required!"),

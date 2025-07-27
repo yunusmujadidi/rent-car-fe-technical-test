@@ -4,40 +4,40 @@ import z from "zod";
 import { toast } from "sonner";
 import { useTransition } from "react";
 
-import { useEditCarDialog } from "@/hooks/use-car";
+import { useEditOrderDialog } from "@/hooks/use-order";
 import { Modal } from "@/components/main/modal";
-import { CarForm } from "@/components/form/car-form";
-import { carFormSchema } from "@/lib/zod-schema";
-import { Car } from "@/lib/types";
-import { editCar } from "@/lib/actions";
+import { orderFormSchema } from "@/lib/zod-schema";
+import { Order } from "@/lib/types";
+import { editOrder } from "@/lib/actions";
+import { OrderForm } from "@/components/form/order-form";
 
 export const EditCarModal = () => {
   const [isPending, startTransition] = useTransition();
-  const { isOpen, onClose, car } = useEditCarDialog();
+  const { isOpen, onClose, order } = useEditOrderDialog();
 
-  const onSubmit = (values: z.infer<typeof carFormSchema>) => {
+  const onSubmit = (values: z.infer<typeof orderFormSchema>) => {
     startTransition(async () => {
-      const res = await editCar(car!.id, {
-        ...values,
-        day_rate: values.day_rate,
-        month_rate: values.month_rate,
-      });
+      const res = await editOrder(order!.id, values);
       onClose();
       if (res) {
-        toast.success("Success edited new car");
+        toast.success("Success edited new Order");
       } else {
-        toast.error("Error edited new car");
+        toast.error("Error edited new Order");
       }
     });
   };
   return (
     <Modal
-      title="Edit Car"
+      title="Edit Order"
       description="Edit the form below"
       isOpen={isOpen}
       onClose={onClose}
     >
-      <CarForm car={car as Car} onSubmit={onSubmit} isPending={isPending} />
+      <OrderForm
+        order={order as Order}
+        onSubmit={onSubmit}
+        isPending={isPending}
+      />
     </Modal>
   );
 };

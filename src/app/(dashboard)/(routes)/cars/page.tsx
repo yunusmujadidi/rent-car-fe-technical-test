@@ -9,7 +9,9 @@ import { Car } from "@/lib/types";
 
 export const dynamic = "force-dynamic";
 
+// async page
 const CarsPageAsync = async () => {
+  // fetch car
   const data = await getCars();
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -20,6 +22,7 @@ const CarsPageAsync = async () => {
   );
 };
 
+// cars page fallback
 const CarsPageFallback = () => {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
@@ -37,7 +40,7 @@ const CarsPage = () => {
       <PageHeader
         title="Cars Management"
         description="Manage your rental cars"
-        actionButton
+        actionCarButton
         buttonTitle="Add New Car"
       />
       {/* search bar */}

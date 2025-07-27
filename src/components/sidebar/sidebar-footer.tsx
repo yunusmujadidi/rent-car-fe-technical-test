@@ -1,5 +1,8 @@
 "use client";
 
+import { LogOut, MoreVertical } from "lucide-react";
+import { useTheme } from "next-themes";
+
 import {
   SidebarMenu,
   SidebarMenuItem,
@@ -17,16 +20,15 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { useIsMobile } from "@/hooks/use-mobile";
-import { LogOut, MoreVertical } from "lucide-react";
-import { useTheme } from "next-themes";
 
 export const SidebarFooter = () => {
+  // get theme and setTheme from hooks
   const { setTheme, theme } = useTheme();
   const isMobile = useIsMobile();
   const user = {
     avatar: "/",
-    name: "User",
-    email: "user@email.com",
+    name: "yunusmujadidi",
+    email: "yunusmujadidi@gmail.com",
   };
   return (
     <SidebarFooterUI>
@@ -61,7 +63,7 @@ export const SidebarFooter = () => {
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
                   <Avatar className="h-8 w-8 rounded-lg">
                     <AvatarImage src={user.avatar} alt={user.name} />
-                    <AvatarFallback className="rounded-lg">CN</AvatarFallback>
+                    <AvatarFallback className="rounded-lg">YM</AvatarFallback>
                   </Avatar>
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">{user.name}</span>
@@ -72,6 +74,7 @@ export const SidebarFooter = () => {
                 </div>
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
+              {/* app theme */}
               <DropdownMenuLabel>App Theme</DropdownMenuLabel>
               <DropdownMenuCheckboxItem
                 checked={theme === "light"}

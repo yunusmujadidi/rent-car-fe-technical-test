@@ -68,7 +68,7 @@ const OrdersPage = async () => {
       <PageHeader
         title="Orders Management"
         description="Manage your rental car orders"
-        actionButton
+        actionOrderButton
         buttonTitle="Add New Order"
       />
       {/* search bar */}

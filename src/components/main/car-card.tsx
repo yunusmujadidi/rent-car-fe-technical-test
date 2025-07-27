@@ -1,4 +1,3 @@
-import { Trash2 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -6,7 +5,6 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
 import { Car } from "@/lib/types";
 import { formatCurrency } from "@/lib/utils";
 import { CardImage } from "@/components/main/card-image";
@@ -16,8 +14,11 @@ import { DeleteCarButton } from "../button/delete-car-button";
 
 export const CarCard = ({ car }: { car: Car }) => {
   return (
+    // card
     <Card className="overflow-hidden hover:shadow-lg transition-shadow pt-0">
+      {/* card image */}
       <CardImage imageSrc={car.image} name={car.name} />
+      {/* card header */}
       <CardHeader>
         <div className="flex">
           <div>
@@ -26,6 +27,7 @@ export const CarCard = ({ car }: { car: Car }) => {
           </div>
         </div>
       </CardHeader>
+      {/* card content */}
       <CardContent className="space-y-8">
         <div className="space-y-2">
           <div className="flex justify-between">
@@ -41,6 +43,7 @@ export const CarCard = ({ car }: { car: Car }) => {
             </p>
           </div>
         </div>
+        {/* action card button */}
         <div className="flex space-x-2">
           <EditCarButton Car={car} />
           <DeleteCarButton id={car.id} />
@@ -50,6 +53,7 @@ export const CarCard = ({ car }: { car: Car }) => {
   );
 };
 
+// card skeleton for react suspense
 export const CarCardSkeleton = () => {
   return (
     <Card className="overflow-hidden pt-0">

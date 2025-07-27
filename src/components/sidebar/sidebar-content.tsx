@@ -1,5 +1,8 @@
 "use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+
 import {
   SidebarContent as SidebarContentUI,
   SidebarGroup,
@@ -9,10 +12,9 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import { navigation } from "@/lib/const";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 
 export const SidebarContent = () => {
+  // get url pathname
   const path = usePathname();
   const route = navigation.map((item) => ({
     ...item,

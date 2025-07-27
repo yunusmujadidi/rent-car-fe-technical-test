@@ -1,9 +1,11 @@
 "use server";
 
 import z from "zod";
-import { carFormSchema } from "./zod-schema";
 import { revalidatePath } from "next/cache";
 
+import { carFormSchema } from "@/lib/zod-schema";
+
+// get cars
 export async function getCars() {
   try {
     const res = await fetch(`${process.env.API_BASE_URL}/cars`, {
@@ -21,6 +23,7 @@ export async function getCars() {
   }
 }
 
+// create car
 export async function createCar(values: z.infer<typeof carFormSchema>) {
   try {
     const res = await fetch(`${process.env.API_BASE_URL}/cars`, {
@@ -41,6 +44,7 @@ export async function createCar(values: z.infer<typeof carFormSchema>) {
   }
 }
 
+// edit car
 export async function editCar(
   id: string,
   values: z.infer<typeof carFormSchema>
@@ -64,6 +68,7 @@ export async function editCar(
   }
 }
 
+// delete car
 export async function deleteCar(id: string) {
   try {
     const res = await fetch(`${process.env.API_BASE_URL}/cars/${id}`, {

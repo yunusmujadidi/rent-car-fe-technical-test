@@ -3,14 +3,16 @@ import { NewCarButton } from "@/components/button/new-car-button";
 interface PageTitleProps {
   title: string;
   description: string;
-  actionButton?: boolean;
+  actionCarButton?: boolean;
+  actionOrderButton?: boolean;
   buttonTitle?: string;
 }
 
 export const PageHeader = ({
   title,
   description,
-  actionButton = false,
+  actionCarButton = false,
+  actionOrderButton = false,
   buttonTitle = "",
 }: PageTitleProps) => {
   return (
@@ -19,7 +21,8 @@ export const PageHeader = ({
         <h1 className="text-3xl font-semibold">{title}</h1>
         <p className="text-muted-foreground">{description}</p>
       </div>
-      <div>{actionButton && <NewCarButton buttonTitle={buttonTitle} />}</div>
+      {actionCarButton && <NewCarButton buttonTitle={buttonTitle} />}
+      {actionOrderButton && <NewCarButton buttonTitle={buttonTitle} />}
     </div>
   );
 };

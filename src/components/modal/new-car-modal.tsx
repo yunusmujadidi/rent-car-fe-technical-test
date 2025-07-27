@@ -14,13 +14,10 @@ export const NewCarModal = () => {
   const { isOpen, onClose } = useNewCarDialog();
   const [isPending, startTransition] = useTransition();
 
+  // onSubmit func as props
   const onSubmit = (values: z.infer<typeof carFormSchema>) => {
     startTransition(async () => {
-      const res = await createCar({
-        ...values,
-        day_rate: values.day_rate,
-        month_rate: values.month_rate,
-      });
+      const res = await createCar(values);
       onClose();
       if (res) {
         toast.success("Success created new car");
@@ -36,6 +33,7 @@ export const NewCarModal = () => {
       isOpen={isOpen}
       onClose={onClose}
     >
+      {/* car form */}
       <CarForm onSubmit={onSubmit} isPending={isPending} />
     </Modal>
   );

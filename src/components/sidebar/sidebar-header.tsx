@@ -1,16 +1,18 @@
+import { Car } from "lucide-react";
+
 import {
   SidebarHeader as SidebarHeaderUI,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
-import { Car } from "lucide-react";
 
 export const SidebarHeader = () => {
   return (
     <SidebarHeaderUI>
       <SidebarMenu>
         <SidebarMenuItem>
+          {/* logo and app name */}
           <SidebarMenuButton
             size="lg"
             className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
@@ -19,8 +21,12 @@ export const SidebarHeader = () => {
               <Car className="size-4" />
             </div>
             <div className="grid flex-1 text-left text-sm leading-tight">
-              <span className="truncate font-semibold">Rentalin Car</span>
-              <span className="truncate text-xs">Rental Management App</span>
+              <span className="truncate font-semibold text-primary">
+                Rental-in Car
+              </span>
+              <span className="truncate text-xs">
+                Rental Car Management App
+              </span>
             </div>
           </SidebarMenuButton>
         </SidebarMenuItem>

@@ -3,7 +3,7 @@
 import z from "zod";
 import { revalidatePath } from "next/cache";
 
-import { carFormSchema } from "@/lib/zod-schema";
+import { carFormSchema, orderFormSchema } from "@/lib/zod-schema";
 
 // get cars
 export async function getCars() {
@@ -83,6 +83,88 @@ export async function deleteCar(id: string) {
     return res.json();
   } catch (error) {
     console.error("Error deleting car:", error);
+    throw error;
+  }
+}
+
+// get orders
+export async function getOrders() {
+  try {
+    const res = await fetch(`${process.env.API_BASE_URL}/orders`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch orders");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.error("Error fetching orders:", error);
+    throw error;
+  }
+}
+
+// create order
+export async function createOrder(values: z.infer<typeof orderFormSchema>) {
+  try {
+    const res = await fetch(`${process.env.API_BASE_URL}/orders`, {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(values),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to create order");
+    }
+
+    revalidatePath("/orders");
+    return res.json();
+  } catch (error) {
+    console.error("Error creating order:", error);
+    throw error;
+  }
+}
+
+// edit order
+export async function editOrder(
+  id: string,
+  values: z.infer<typeof orderFormSchema>
+) {
+  try {
+    const res = await fetch(`${process.env.API_BASE_URL}/orders/${id}`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(values),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to update order");
+    }
+
+    revalidatePath("/orders");
+    return res.json();
+  } catch (error) {
+    console.error("Error updating order:", error);
+    throw error;
+  }
+}
+
+// delete order
+export async function deleteOrder(id: string) {
+  try {
+    const res = await fetch(`${process.env.API_BASE_URL}/orders/${id}`, {
+      method: "DELETE",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to delete order");
+    }
+
+    revalidatePath("/orders");
+    return res.json();
+  } catch (error) {
+    console.error("Error deleting order:", error);
     throw error;
   }
 }

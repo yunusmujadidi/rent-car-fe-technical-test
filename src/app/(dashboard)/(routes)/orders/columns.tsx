@@ -1,65 +1,72 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu";
 import { ColumnDef } from "@tanstack/react-table";
-import { MoreHorizontal } from "lucide-react";
+import { OrderActions } from "@/app/(dashboard)/(routes)/orders/order-actions";
+import { Button } from "@/components/ui/button";
+import { ArrowUpDown } from "lucide-react";
+import { Order } from "@/lib/types";
+import { calculateDays, safeFormatDate } from "@/lib/utils";
+import { format, formatDate, isValid } from "date-fns";
 
-// This type is used to define the shape of our data.
-// You can use a Zod schema here if you want.
-export type Payment = {
-  id: string;
-  amount: number;
-  status: "pending" | "processing" | "success" | "failed";
-  email: string;
-};
-
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<Order>[] = [
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Order ID
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
   },
   {
-    accessorKey: "email",
-    header: "Email",
+    id: "rental_period",
+    header: "Rental Period",
+    cell: ({ row }) => {
+      const pickupDate = row.original.pickup_date;
+      const dropoffDate = row.original.dropoff_date;
+      const days = calculateDays(pickupDate, dropoffDate);
+
+      return (
+        <div className="space-y-1">
+          <div className="text-sm">
+            {safeFormatDate(pickupDate)} - {safeFormatDate(dropoffDate)}
+          </div>
+          <div className="text-sm text-muted-foreground">{days} days</div>
+        </div>
+      );
+    },
   },
   {
-    accessorKey: "amount",
-    header: "Amount",
+    id: "locations",
+    header: "Locations",
+    cell: ({ row }) => {
+      const pickup = row.original.pickup_location;
+      const dropoff = row.original.dropoff_location;
+
+      return (
+        <div className="space-y-1">
+          <div className="text-sm">{pickup || "N/A"}</div>
+          <div className="text-sm">{dropoff || "N/A"}</div>
+        </div>
+      );
+    },
+  },
+  {
+    accessorKey: "order_date",
+    header: "Order Date",
+    cell: ({ row }) => {
+      return safeFormatDate(row.original.order_date);
+    },
   },
   {
     id: "actions",
     cell: ({ row }) => {
-      const payment = row.original;
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal className="h-4 w-4" />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
+      return <OrderActions order={row.original} />;
     },
   },
 ];

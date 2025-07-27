@@ -12,6 +12,7 @@ import { formatCurrency } from "@/lib/utils";
 import { CardImage } from "@/components/main/card-image";
 import { Skeleton } from "@/components/ui/skeleton";
 import { EditCarButton } from "@/components/button/edit-car-button";
+import { DeleteCarButton } from "../button/delete-car-button";
 
 export const CarCard = ({ car }: { car: Car }) => {
   return (
@@ -42,9 +43,7 @@ export const CarCard = ({ car }: { car: Car }) => {
         </div>
         <div className="flex space-x-2">
           <EditCarButton Car={car} />
-          <Button variant="destructive" size="sm">
-            <Trash2 className="size-4" />
-          </Button>
+          <DeleteCarButton id={car.id} />
         </div>
       </CardContent>
     </Card>

@@ -63,3 +63,21 @@ export async function editCar(
     throw error;
   }
 }
+
+export async function deleteCar(id: string) {
+  try {
+    const res = await fetch(`${process.env.API_BASE_URL}/cars/${id}`, {
+      method: "DELETE",
+      body: JSON.stringify(id),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to delete car");
+    }
+    revalidatePath("/cars");
+    return res.json();
+  } catch (error) {
+    console.error("Error deleting car:", error);
+    throw error;
+  }
+}

@@ -17,13 +17,17 @@ export const EditCarModal = () => {
 
   const onSubmit = (values: z.infer<typeof carFormSchema>) => {
     startTransition(async () => {
-      await editCar(car!.id, {
+      const res = await editCar(car!.id, {
         ...values,
-        day_rate: values.day_rate.toString(),
-        month_rate: values.month_rate.toString(),
+        day_rate: values.day_rate,
+        month_rate: values.month_rate,
       });
       onClose();
-      toast.success("Success updated the car");
+      if (res) {
+        toast.success("Success edited new car");
+      } else {
+        toast.error("Error edited new car");
+      }
     });
   };
   return (

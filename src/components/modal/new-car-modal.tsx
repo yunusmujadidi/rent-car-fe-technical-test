@@ -16,13 +16,17 @@ export const NewCarModal = () => {
 
   const onSubmit = (values: z.infer<typeof carFormSchema>) => {
     startTransition(async () => {
-      await createCar({
+      const res = await createCar({
         ...values,
-        day_rate: values.day_rate.toString(),
-        month_rate: values.month_rate.toString(),
+        day_rate: values.day_rate,
+        month_rate: values.month_rate,
       });
       onClose();
-      toast.success("Success created new car");
+      if (res) {
+        toast.success("Success created new car");
+      } else {
+        toast.error("Error created new car");
+      }
     });
   };
   return (

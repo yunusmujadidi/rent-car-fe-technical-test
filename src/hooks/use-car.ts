@@ -9,9 +9,9 @@ type useNewCarDialogState = {
 
 type useEditCarDialogState = {
   isOpen: boolean;
-  onOpen: () => void;
+  onOpen: (car: Car) => void;
   onClose: () => void;
-  Car: Car | null;
+  car: Car | null;
 };
 
 export const useNewCarDialog = create<useNewCarDialogState>((set) => ({
@@ -21,8 +21,8 @@ export const useNewCarDialog = create<useNewCarDialogState>((set) => ({
 }));
 
 export const useEditCarDialog = create<useEditCarDialogState>((set) => ({
-  Car: null,
+  car: null,
   isOpen: false,
-  onOpen: () => set({ isOpen: true }),
+  onOpen: (car) => set({ isOpen: true, car }),
   onClose: () => set({ isOpen: false }),
 }));

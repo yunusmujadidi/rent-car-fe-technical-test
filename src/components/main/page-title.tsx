@@ -1,6 +1,4 @@
-import { PlusCircle } from "lucide-react";
-import { Button } from "../ui/button";
-import { NewCarButton } from "../button/new-car-button";
+import { NewCarButton } from "@/components/button/new-car-button";
 
 interface PageTitleProps {
   title: string;

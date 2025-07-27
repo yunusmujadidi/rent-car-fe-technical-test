@@ -1,3 +1,4 @@
+import { Trash2 } from "lucide-react";
 import {
   Card,
   CardContent,
@@ -5,13 +6,12 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Edit, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Car } from "@/lib/types";
 import { formatCurrency } from "@/lib/utils";
-import { CardImage } from "./card-image";
+import { CardImage } from "@/components/main/card-image";
 import { Skeleton } from "@/components/ui/skeleton";
-import { EditCarButton } from "../button/edit-car-button";
+import { EditCarButton } from "@/components/button/edit-car-button";
 
 export const CarCard = ({ car }: { car: Car }) => {
   return (
@@ -41,7 +41,7 @@ export const CarCard = ({ car }: { car: Car }) => {
           </div>
         </div>
         <div className="flex space-x-2">
-          <EditCarButton />
+          <EditCarButton Car={car} />
           <Button variant="destructive" size="sm">
             <Trash2 className="size-4" />
           </Button>

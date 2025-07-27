@@ -15,35 +15,26 @@ import {
 import { Input } from "@/components/ui/input";
 import { useNewCarDialog } from "@/hooks/use-car";
 import { carFormSchema } from "@/lib/zod-schema";
-import { createCar } from "@/lib/actions";
-import { useTransition } from "react";
 import { Loader2Icon } from "lucide-react";
-import { toast } from "sonner";
+import { Car } from "@/lib/types";
 
-export const CarForm = () => {
-  const [isPending, startTransition] = useTransition();
+interface CarFormProps {
+  car?: Car;
+  onSubmit: (values: z.infer<typeof carFormSchema>) => void;
+  isPending: boolean;
+}
+export const CarForm = ({ car: car, onSubmit, isPending }: CarFormProps) => {
   const { onClose } = useNewCarDialog();
   const form = useForm<z.infer<typeof carFormSchema>>({
     resolver: zodResolver(carFormSchema),
     defaultValues: {
-      name: "",
-      image: "",
-      day_rate: "",
-      month_rate: "",
+      name: car?.name || "",
+      image: car?.image || "",
+      day_rate: car?.day_rate || "",
+      month_rate: car?.month_rate || "",
     },
   });
 
-  const onSubmit = (values: z.infer<typeof carFormSchema>) => {
-    startTransition(async () => {
-      await createCar({
-        ...values,
-        day_rate: values.day_rate.toString(),
-        month_rate: values.month_rate.toString(),
-      });
-      onClose();
-      toast.success("Success created new car");
-    });
-  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
@@ -111,7 +102,8 @@ export const CarForm = () => {
             Cancel
           </Button>
           <Button disabled={isPending} type="submit">
-            {isPending && <Loader2Icon className="animate-spin mr-2" />}Submit
+            {isPending && <Loader2Icon className="animate-spin mr-2" />}
+            {car ? "Edit Car" : "Create Car"}
           </Button>
         </div>
       </form>

@@ -7,7 +7,6 @@ import {
 } from "@/components/ui/dialog";
 
 interface ModalProps {
-  onSubmit: () => void;
   isOpen: boolean;
   title: string;
   description: string;

@@ -40,3 +40,26 @@ export async function createCar(values: z.infer<typeof carFormSchema>) {
     throw error;
   }
 }
+
+export async function editCar(
+  id: string,
+  values: z.infer<typeof carFormSchema>
+) {
+  try {
+    const res = await fetch(`${process.env.API_BASE_URL}/cars/${id}`, {
+      method: "PATCH",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify(values),
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to update car");
+    }
+
+    revalidatePath("/cars");
+    return res.json();
+  } catch (error) {
+    console.error("Error updating car:", error);
+    throw error;
+  }
+}

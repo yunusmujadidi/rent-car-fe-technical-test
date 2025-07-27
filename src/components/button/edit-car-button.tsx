@@ -2,14 +2,15 @@
 
 import { Button } from "@/components/ui/button";
 import { useEditCarDialog } from "@/hooks/use-car";
+import { Car } from "@/lib/types";
 import { Edit } from "lucide-react";
 
-export const EditCarButton = () => {
+export const EditCarButton = ({ Car }: { Car: Car }) => {
   const { onOpen } = useEditCarDialog();
   return (
     <Button
       onClick={() => {
-        onOpen();
+        onOpen(Car);
       }}
       variant="outline"
       size="sm"

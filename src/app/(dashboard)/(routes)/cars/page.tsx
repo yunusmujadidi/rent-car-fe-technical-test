@@ -43,7 +43,7 @@ const CarsPage = () => {
       {/* search bar */}
       <div className="relative">
         <Input
-          className="max-w-3xl pl-10 bg-muted"
+          className="max-w-3xl pl-10"
           placeholder="Search car by name or ID"
         />
         <Search className="w-5 h-5 text-muted-foreground absolute left-3 top-1/2 transform -translate-y-1/2" />

@@ -2,6 +2,7 @@
 
 import { useNewCarDialog } from "@/hooks/use-car";
 import { Modal } from "../main/modal";
+import { CarForm } from "../form/car-form";
 
 export const NewCarModal = () => {
   const { isOpen, onClose } = useNewCarDialog();
@@ -13,7 +14,7 @@ export const NewCarModal = () => {
       onSubmit={() => {}}
       onClose={onClose}
     >
-      New Car Form
+      <CarForm />
     </Modal>
   );
 };

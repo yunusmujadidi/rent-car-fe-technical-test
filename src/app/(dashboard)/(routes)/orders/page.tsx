@@ -1,9 +1,8 @@
-import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Search } from "lucide-react";
-import { DataTable } from "./data-table";
-import { columns, Payment } from "./columns";
+import { DataTable } from "@/app/(dashboard)/(routes)/orders/data-table";
+import { columns, Payment } from "@/app/(dashboard)/(routes)/orders/columns";
 import { PageHeader } from "@/components/main/page-title";
 
 async function getData(): Promise<Payment[]> {

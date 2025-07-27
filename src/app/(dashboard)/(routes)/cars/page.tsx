@@ -1,9 +1,34 @@
-import { PlusCircle, Search } from "lucide-react";
+import { Suspense } from "react";
+import { Search } from "lucide-react";
 
-import { CarCard } from "@/components/main/car-card";
-import { Button } from "@/components/ui/button";
+import { CarCard, CarCardSkeleton } from "@/components/main/car-card";
 import { Input } from "@/components/ui/input";
 import { PageHeader } from "@/components/main/page-title";
+import { getCars } from "@/lib/actions";
+import { Car } from "@/lib/types";
+
+export const dynamic = "force-dynamic";
+
+const CarsPageAsync = async () => {
+  const data = await getCars();
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      {data.map((car: Car) => (
+        <CarCard key={car.id} car={car} />
+      ))}
+    </div>
+  );
+};
+
+const CarsPageFallback = () => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
+      {Array.from({ length: 9 }).map((_, i) => (
+        <CarCardSkeleton key={i} />
+      ))}
+    </div>
+  );
+};
 
 const CarsPage = () => {
   return (
@@ -25,18 +50,9 @@ const CarsPage = () => {
       </div>
 
       {/* content */}
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-        <CarCard />
-      </div>
+      <Suspense fallback={<CarsPageFallback />}>
+        <CarsPageAsync />
+      </Suspense>
     </div>
   );
 };

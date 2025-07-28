@@ -60,7 +60,7 @@ export const OrderForm = ({ order, onSubmit, isPending }: OrderFormProps) => {
     const fetchCars = async () => {
       try {
         setIsLoadingCars(true);
-        const data = await getCars();
+        const data = await getCars({});
         setCars(data);
       } catch (error) {
         console.error("Error fetching cars:", error);

@@ -24,6 +24,20 @@ export const columns: ColumnDef<Order>[] = [
     },
   },
   {
+    accessorKey: "car_id",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Car ID
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
+  },
+  {
     id: "rental_period",
     header: "Rental Period",
     cell: ({ row }) => {
@@ -64,7 +78,17 @@ export const columns: ColumnDef<Order>[] = [
   },
   {
     accessorKey: "order_date",
-    header: "Order Date",
+    header: ({ column }) => {
+      return (
+        <Button
+          variant="ghost"
+          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        >
+          Order Date
+          <ArrowUpDown className="ml-2 h-4 w-4" />
+        </Button>
+      );
+    },
     cell: ({ row }) => {
       return safeFormatDate(row.original.order_date);
     },

@@ -74,7 +74,7 @@ export const CarForm = ({ car: car, onSubmit, isPending }: CarFormProps) => {
             <FormItem>
               <FormLabel>Day Rate</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="Rp.300.000" {...field} />
+                <Input placeholder="Rp.300.000" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>
@@ -87,7 +87,7 @@ export const CarForm = ({ car: car, onSubmit, isPending }: CarFormProps) => {
             <FormItem>
               <FormLabel>Month Rate</FormLabel>
               <FormControl>
-                <Input type="number" placeholder="Rp.10.000.000" {...field} />
+                <Input placeholder="Rp.10.000.000" {...field} />
               </FormControl>
               <FormMessage />
             </FormItem>

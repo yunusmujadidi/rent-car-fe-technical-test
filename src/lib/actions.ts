@@ -7,22 +7,39 @@ import { carFormSchema, orderFormSchema } from "@/lib/zod-schema";
 
 // get cars
 export async function getCars({
-  search,
+  search = "",
   order = "desc",
+  sortBy = "id",
 }: {
   search?: string;
   order?: "asc" | "desc";
+  sortBy?: string;
 }) {
   const url = new URL(`${process.env.API_BASE_URL}/cars`);
 
-  if (search) url.searchParams.append("car_name", search);
-  url.searchParams.append("sortBy", "car_name");
-  url.searchParams.append("order", order);
+  if (search) url.searchParams.append("search", search);
+  if (sortBy) url.searchParams.append("sortBy", sortBy);
+  if (order) url.searchParams.append("order", order);
 
   try {
-    const res = await fetch(url, { cache: "no-store" });
-    if (!res.ok) throw new Error("Failed to fetch cars");
-    return res.json();
+    const res = await fetch(url.toString(), { cache: "no-store" });
+    const text = await res.text();
+
+    if (text.trim().toLowerCase() === "not found") {
+      return [];
+    }
+
+    if (!text.trim()) {
+      return [];
+    }
+
+    const data = JSON.parse(text);
+
+    if (!Array.isArray(data)) {
+      return [];
+    }
+
+    return data;
   } catch (error) {
     console.error("Error fetching cars:", error);
     throw error;

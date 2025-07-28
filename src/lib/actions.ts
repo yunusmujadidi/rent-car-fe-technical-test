@@ -6,16 +6,22 @@ import { revalidatePath } from "next/cache";
 import { carFormSchema, orderFormSchema } from "@/lib/zod-schema";
 
 // get cars
-export async function getCars() {
+export async function getCars({
+  search,
+  order = "desc",
+}: {
+  search?: string;
+  order?: "asc" | "desc";
+}) {
+  const url = new URL(`${process.env.API_BASE_URL}/cars`);
+
+  if (search) url.searchParams.append("car_name", search);
+  url.searchParams.append("sortBy", "car_name");
+  url.searchParams.append("order", order);
+
   try {
-    const res = await fetch(`${process.env.API_BASE_URL}/cars`, {
-      cache: "no-store",
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch cars");
-    }
-
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) throw new Error("Failed to fetch cars");
     return res.json();
   } catch (error) {
     console.error("Error fetching cars:", error);

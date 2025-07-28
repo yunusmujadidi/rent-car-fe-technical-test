@@ -1,12 +1,12 @@
 "use client";
 
+import { ArrowUpDown } from "lucide-react";
 import { ColumnDef } from "@tanstack/react-table";
+
 import { OrderActions } from "@/app/(dashboard)/(routes)/orders/order-actions";
 import { Button } from "@/components/ui/button";
-import { ArrowUpDown } from "lucide-react";
 import { Order } from "@/lib/types";
 import { calculateDays, safeFormatDate } from "@/lib/utils";
-import { format, formatDate, isValid } from "date-fns";
 
 export const columns: ColumnDef<Order>[] = [
   {
@@ -50,8 +50,14 @@ export const columns: ColumnDef<Order>[] = [
 
       return (
         <div className="space-y-1">
-          <div className="text-sm">{pickup || "N/A"}</div>
-          <div className="text-sm">{dropoff || "N/A"}</div>
+          <div className="flex items-center text-sm">
+            <ArrowUpDown className="h-4 w-4 mr-1 text-primary" />
+            <span>Pickup: {pickup || "N/A"}</span>
+          </div>
+          <div className="flex items-center text-sm">
+            <ArrowUpDown className="h-4 w-4 mr-1 text-primary-foreground" />
+            <span>Dropoff: {dropoff || "N/A"}</span>
+          </div>
         </div>
       );
     },

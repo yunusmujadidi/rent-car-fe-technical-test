@@ -1,5 +1,8 @@
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
-import { DataTable } from "@/app/(dashboard)/(routes)/orders/data-table";
+import {
+  DataTable,
+  TableDataSkeleton,
+} from "@/app/(dashboard)/(routes)/orders/data-table";
 import { columns } from "@/app/(dashboard)/(routes)/orders/columns";
 import { PageHeader } from "@/components/main/page-title";
 import { getOrders } from "@/lib/actions";
@@ -30,7 +33,7 @@ const OrdersPage = () => {
           <p className="text-muted-foreground">Orders table</p>
         </CardHeader>
         <CardContent>
-          <Suspense fallback={<Loader2 className="size-4 animate-spin" />}>
+          <Suspense fallback={<TableDataSkeleton />}>
             <OrderPageAsync />
           </Suspense>
         </CardContent>

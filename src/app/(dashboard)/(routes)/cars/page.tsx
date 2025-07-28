@@ -1,18 +1,21 @@
 import { Suspense } from "react";
-import { Search } from "lucide-react";
 
 import { CarCard, CarCardSkeleton } from "@/components/main/car-card";
-import { Input } from "@/components/ui/input";
 import { PageHeader } from "@/components/main/page-title";
 import { getCars } from "@/lib/actions";
 import { Car } from "@/lib/types";
+import { CarFilter } from "@/components/main/car-filter";
 
 export const dynamic = "force-dynamic";
 
 // async page
-const CarsPageAsync = async () => {
+const CarsPageAsync = async ({
+  searchParams,
+}: {
+  searchParams: Record<string, string | undefined>;
+}) => {
   // fetch car
-  const data = await getCars();
+  const data = await getCars(searchParams);
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
       {data.map((car: Car) => (
@@ -33,7 +36,11 @@ const CarsPageFallback = () => {
   );
 };
 
-const CarsPage = () => {
+const CarsPage = ({
+  searchParams,
+}: {
+  searchParams: Record<string, string | undefined>;
+}) => {
   return (
     <div className="m-4 p-4 space-y-4">
       {/* header */}
@@ -43,18 +50,12 @@ const CarsPage = () => {
         actionCarButton
         buttonTitle="Add New Car"
       />
-      {/* search bar */}
-      <div className="relative">
-        <Input
-          className="max-w-3xl pl-10"
-          placeholder="Search car by name or ID"
-        />
-        <Search className="w-5 h-5 text-muted-foreground absolute left-3 top-1/2 transform -translate-y-1/2" />
-      </div>
+      {/* car filter */}
+      <CarFilter />
 
       {/* content */}
       <Suspense fallback={<CarsPageFallback />}>
-        <CarsPageAsync />
+        <CarsPageAsync searchParams={searchParams} />
       </Suspense>
     </div>
   );

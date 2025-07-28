@@ -24,8 +24,8 @@ export const DeleteCarButton = ({ id }: { id: string }) => {
             success: () => "Car deleted successfully",
             error: "Error deleting car",
           });
-        } catch (error) {
-          toast.error("Error deleting car");
+        } catch (error: unknown) {
+          toast.error(`Error deleting car : ${error}`);
         }
       });
     }

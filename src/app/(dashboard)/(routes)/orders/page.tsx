@@ -1,3 +1,5 @@
+import { Suspense } from "react";
+
 import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   DataTable,
@@ -6,8 +8,6 @@ import {
 import { columns } from "@/app/(dashboard)/(routes)/orders/columns";
 import { PageHeader } from "@/components/main/page-title";
 import { getOrders } from "@/lib/actions";
-import { Suspense } from "react";
-import { Loader2 } from "lucide-react";
 
 export const dynamic = "force-dynamic";
 

@@ -35,8 +35,8 @@ export const OrderActions = ({ order }: { order: Order }) => {
             success: () => "Order deleted successfully",
             error: "Error deleting order",
           });
-        } catch (error) {
-          toast.error("Error deleting order");
+        } catch (error: unknown) {
+          toast.error(`Error deleting order ${error}`);
         }
       });
     }
